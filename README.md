@@ -1,4 +1,4 @@
-# <img src="https://repository-images.githubusercontent.com/356668416/d32c5200-9b9d-11eb-9b75-ae465a1372f4" placeholder="Flight Sim Community NL" width="400"/>
+# <img src="https://repository-images.githubusercontent.com/356668416/d32c5200-9b9d-11eb-9b75-ae465a1372f4" placeholder="Flight Sim Community NL" width="300"/>
 
 
 [![Discord](https://img.shields.io/discord/795130247375880212.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/RJpCx9rJPc)
