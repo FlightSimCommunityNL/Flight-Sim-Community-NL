@@ -700,6 +700,66 @@
     "size": 102,
     "date": 132398508751470306
   },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/CUP_LOW2_ALBEDO.PNG.DDS",
+    "size": 699192,
+    "date": 132623884170863340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/CUP_LOW2_ALBEDO.PNG.DDS.json",
+    "size": 102,
+    "date": 132623884170863340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/CUP_LOW2_METAL.PNG.DDS",
+    "size": 1398276,
+    "date": 132623884170903340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/CUP_LOW2_METAL.PNG.DDS.json",
+    "size": 191,
+    "date": 132623884170903340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/CUP_LOW2_NORMAL.PNG.DDS",
+    "size": 1398256,
+    "date": 132623884170943340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/CUP_LOW2_NORMAL.PNG.DDS.json",
+    "size": 160,
+    "date": 132623884170943340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/FLYPAD_ALBEDO.TIF.DDS",
+    "size": 5592580,
+    "date": 132623884171023340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/FLYPAD_ALBEDO.TIF.DDS.json",
+    "size": 119,
+    "date": 132623884171063340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/FLYPAD_COMP.PNG.DDS",
+    "size": 5592580,
+    "date": 132623884171343340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/FLYPAD_COMP.PNG.DDS.json",
+    "size": 191,
+    "date": 132623884171343340
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/FLYPAD_NORM.PNG.DDS",
+    "size": 5592560,
+    "date": 132623884172423360
+  },
+  {
+    "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/FLYPAD_NORM.PNG.DDS.json",
+    "size": 160,
+    "date": 132623884172463360
+  },
 	{
       "path": "SimObjects/AirPlanes/FSCNL_A320_NEO-GRAZZYDUCK/TEXTURE.GRAZZYDUCK/texture.CFG",
       "size": 166,
