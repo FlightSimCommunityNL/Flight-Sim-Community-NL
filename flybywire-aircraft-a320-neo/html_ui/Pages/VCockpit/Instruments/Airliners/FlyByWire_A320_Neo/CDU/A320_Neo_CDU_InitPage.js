@@ -384,12 +384,10 @@ class CDUInitPage {
         let tripColor = "[color]white";
 
         let rteRsvWeightCell = "---.-";
-        let rteRsvPercentCell = "5.0";
+        let rteRsvPercentCell = "{cyan}5.0{end}";
         let rteRsvColor = "[color]white";
-        let rteRsvPctColor = "{cyan}";
         if (isFinite(mcdu.getRouteReservedPercent())) {
-            rteRsvPercentCell = mcdu.getRouteReservedPercent().toFixed(1);
-            rteRsvPctColor = "{cyan}";
+            rteRsvPercentCell = "{cyan}" + mcdu.getRouteReservedPercent().toFixed(1) + "{end}";
         }
         mcdu.onLeftInput[2] = async (value) => {
             if (await mcdu.trySetRouteReservedPercent(value)) {
@@ -400,7 +398,6 @@ class CDUInitPage {
         let altnWeightCell = "---.-";
         let altnTimeCell = "----";
         let altnColor = "[color]white";
-        let altnTimeColor = "{white}";
 
         let finalWeightCell = "---.-";
         let finalTimeCell = "----";
@@ -417,7 +414,6 @@ class CDUInitPage {
         let extraWeightCell = "---.-";
         let extraTimeCell = "----";
         let extraColor = "[color]white";
-        let extraTimeColor = "{white}";
 
         let minDestFob = "---.-";
         let minDestFobColor = "[color]white";
@@ -442,21 +438,20 @@ class CDUInitPage {
             }
 
             if (mcdu._fuelPredDone) {
-                if (!mcdu.routeFinalEntered()) {
-                    mcdu.tryUpdateRouteFinalFuel();
-                }
-                if (isFinite(mcdu.getRouteFinalFuelWeight()) && isFinite(mcdu.getRouteFinalFuelTime())) {
-                    if (mcdu._rteFinalWeightEntered) {
+
+                if (mcdu._rteFinalEntered) {
+                    if (isFinite(mcdu.getRouteFinalFuelWeight())) {
                         finalWeightCell = "{sp}{sp}" + (mcdu.getRouteFinalFuelWeight() * mcdu._conversionWeight).toFixed(1);
-                    } else {
-                        finalWeightCell = "{sp}{sp}{small}" + (mcdu.getRouteFinalFuelWeight() * mcdu._conversionWeight).toFixed(1) + "{end}";
-                    }
-                    if (mcdu._rteFinalTimeEntered || !mcdu.routeFinalEntered()) {
                         finalTimeCell = FMCMainDisplay.minutesTohhmm(mcdu.getRouteFinalFuelTime());
-                    } else {
-                        finalTimeCell = "{small}" + FMCMainDisplay.minutesTohhmm(mcdu.getRouteFinalFuelTime()) + "{end}";
+                        finalColor = "[color]cyan";
                     }
-                    finalColor = "[color]cyan";
+                } else {
+                    mcdu.tryUpdateRouteFinalFuel();
+                    if (isFinite(mcdu.getRouteFinalFuelWeight())) {
+                        finalWeightCell = "{sp}{sp}{small}" + (mcdu.getRouteFinalFuelWeight() * mcdu._conversionWeight).toFixed(1) + "{end}";
+                        finalTimeCell = FMCMainDisplay.minutesTohhmm(mcdu.getRouteFinalFuelTime());
+                        finalColor = "[color]cyan";
+                    }
                 }
                 mcdu.onLeftInput[4] = async (value) => {
                     setTimeout(async () => {
@@ -468,30 +463,20 @@ class CDUInitPage {
                     }, mcdu.getDelayHigh());
                 };
 
-                if (mcdu.altDestination) {
-                    if (mcdu._routeAltFuelEntered) {
-                        if (isFinite(mcdu.getRouteAltFuelWeight())) {
-                            altnWeightCell = "{sp}{sp}" + (mcdu.getRouteAltFuelWeight() * mcdu._conversionWeight).toFixed(1);
-                            altnTimeCell = "{small}" + FMCMainDisplay.minutesTohhmm(mcdu.getRouteAltFuelTime()) + "{end}";
-                            altnTimeColor = "{green}";
-                            altnColor = "[color]cyan";
-                        }
-                    } else {
-                        mcdu.tryUpdateRouteAlternate();
-                        if (isFinite(mcdu.getRouteAltFuelWeight())) {
-                            altnWeightCell = "{sp}{sp}{small}" + (mcdu.getRouteAltFuelWeight() * mcdu._conversionWeight).toFixed(1);
-                            altnTimeCell = FMCMainDisplay.minutesTohhmm(mcdu.getRouteAltFuelTime()) + "{end}";
-                            altnTimeColor = "{green}";
-                            altnColor = "[color]cyan";
-                        }
+                if (mcdu._routeAltFuelEntered) {
+                    if (isFinite(mcdu.getRouteAltFuelWeight())) {
+                        altnWeightCell = "{sp}{sp}" + (mcdu.getRouteAltFuelWeight() * mcdu._conversionWeight).toFixed(1);
+                        altnTimeCell = "{small}{green}" + FMCMainDisplay.minutesTohhmm(mcdu.getRouteAltFuelTime()) + "{end}{end}";
+                        altnColor = "[color]cyan";
                     }
                 } else {
-                    altnWeightCell = "{sp}{sp}{small}0.0{end}";
-                    altnTimeCell = "----";
-                    altnColor = "[color]green";
-                    altnTimeColor = "{white}";
+                    mcdu.tryUpdateRouteAlternate();
+                    if (isFinite(mcdu.getRouteAltFuelWeight())) {
+                        altnWeightCell = "{sp}{sp}{small}" + (mcdu.getRouteAltFuelWeight() * mcdu._conversionWeight).toFixed(1);
+                        altnTimeCell = "{green}" + FMCMainDisplay.minutesTohhmm(mcdu.getRouteAltFuelTime()) + "{end}{end}";
+                        altnColor = "[color]cyan";
+                    }
                 }
-
                 mcdu.onLeftInput[3] = async (value) => {
                     setTimeout(async () => {
                         if (await mcdu.trySetRouteAlternateFuel(value)) {
@@ -509,28 +494,21 @@ class CDUInitPage {
                     tripColor = "[color]green";
                 }
 
-                if (isFinite(mcdu.getRouteReservedWeight())) {
-                    if (mcdu._rteReservedWeightEntered) {
-                        rteRsvWeightCell = "{sp}{sp}" + (mcdu.getRouteReservedWeight() * mcdu._conversionWeight).toFixed(1);
-                    } else {
-                        rteRsvWeightCell = "{sp}{sp}{small}" + (mcdu.getRouteReservedWeight() * mcdu._conversionWeight).toFixed(1) + "{end}";
-                    }
-                    rteRsvColor = "[color]cyan";
-                }
-
                 if (mcdu._rteRsvPercentOOR) {
+                    rteRsvWeightCell = "{sp}{sp}{small}" + "---.-" + "{end}";
                     rteRsvPercentCell = "--.-";
-                    rteRsvPctColor = "{white}";
-                } else if (isFinite(mcdu.getRouteReservedPercent())) {
-                    if (mcdu._rteReservedPctEntered || !mcdu.routeReservedEntered()) {
-                        rteRsvPercentCell = mcdu.getRouteReservedPercent().toFixed(1);
-                    } else {
-                        rteRsvPercentCell = "{small}" + mcdu.getRouteReservedPercent().toFixed(1) + "{end}";
-                    }
                     rteRsvColor = "[color]cyan";
-                    rteRsvPctColor = "{cyan}";
+                } else {
+                    if (isFinite(mcdu.getRouteReservedWeight()) && isFinite(mcdu.getRouteReservedPercent())) {
+                        if (mcdu._rteReservedEntered) {
+                            rteRsvWeightCell = "{sp}{sp}" + (mcdu.getRouteReservedWeight() * mcdu._conversionWeight).toFixed(1);
+                        } else {
+                            rteRsvWeightCell = "{sp}{sp}{small}" + (mcdu.getRouteReservedWeight() * mcdu._conversionWeight).toFixed(1) + "{end}";
+                        }
+                        rteRsvPercentCell = mcdu.getRouteReservedPercent().toFixed(1);
+                        rteRsvColor = "[color]cyan";
+                    }
                 }
-
                 mcdu.onLeftInput[2] = async (value) => {
                     setTimeout(async () => {
                         if (await mcdu.trySetRouteReservedFuel(value)) {
@@ -569,24 +547,14 @@ class CDUInitPage {
                     minDestFobColor = "[color]cyan";
                 }
                 mcdu.onLeftInput[5] = async (value) => {
-                    setTimeout(async () => {
-                        if (await mcdu.trySetMinDestFob(value)) {
-                            if (mcdu.page.Current === mcdu.page.InitPageB) {
-                                CDUInitPage.ShowPage2(mcdu);
-                            }
-                        }
-                    }, mcdu.getDelayHigh());
+                    if (await mcdu.trySetMinDestFob(value)) {
+                        CDUInitPage.ShowPage2(mcdu);
+                    }
                 };
                 mcdu.checkEFOBBelowMin();
 
                 extraWeightCell = "{small}" + (mcdu.tryGetExtraFuel() * mcdu._conversionWeight).toFixed(1);
-                if (mcdu.tryGetExtraFuel() < 0) {
-                    extraTimeCell = "----{end}";
-                    extraTimeColor = "{white}";
-                } else {
-                    extraTimeCell = FMCMainDisplay.minutesTohhmm(mcdu.tryGetExtraTime()) + "{end}";
-                    extraTimeColor = "{green}";
-                }
+                extraTimeCell = FMCMainDisplay.minutesTohhmm(mcdu.tryGetExtraTime()) + "{end}";
                 extraColor = "[color]green";
             }
         }
@@ -598,13 +566,13 @@ class CDUInitPage {
             ["TRIP\xa0\xa0/TIME", "BLOCK"],
             [tripWeightCell + "/" + tripTimeCell + tripColor, blockFuel + blockFuelColor],
             ["RTE RSV/%", fuelPlanTopTitle + fuelPlanColor],
-            [rteRsvWeightCell + rteRsvPctColor + "/" + rteRsvPercentCell + "{end}" + rteRsvColor, fuelPlanBottomTitle + fuelPlanColor],
+            [rteRsvWeightCell + "/" + rteRsvPercentCell + rteRsvColor, fuelPlanBottomTitle + fuelPlanColor],
             ["ALTN\xa0\xa0/TIME", "TOW/\xa0\xa0\xa0\xa0LW"],
-            [altnWeightCell + altnTimeColor + "/" + altnTimeCell + "{end}" + altnColor, towCell + "/" + lwCell + towLwColor],
+            [altnWeightCell + "/" + altnTimeCell + altnColor, towCell + "/" + lwCell + towLwColor],
             ["FINAL\xa0/TIME", "TRIP WIND"],
             [finalWeightCell + "/" + finalTimeCell + finalColor, "{small}" + tripWindCell + "{end}" + tripWindColor],
             ["MIN DEST FOB", "EXTRA/\xa0TIME"],
-            [minDestFob + minDestFobColor, extraWeightCell + extraTimeColor + "/" + extraTimeCell + "{end}" + extraColor],
+            [minDestFob + minDestFobColor, extraWeightCell + "/" + extraTimeCell + extraColor],
         ]);
 
         mcdu.setArrows(false, false, true, true);

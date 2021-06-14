@@ -1,5 +1,5 @@
 {
-  "creator": "Flight Sim Community NL",
+  "creator": "FlyByWire Simulations",
   "release_notes": {
     "neutral": {
       "LastUpdate": "VERSION 0.6.0\\nInitial Release onto Marketplace",
@@ -28,6 +28,6 @@
   "content_type": "AIRCRAFT",
   "minimum_game_version": "1.9.5",
   "manufacturer": "Airbus",
-  "package_version": "0.6.0",
-  "total_package_size": "00000000001581582876"
+  "package_version": "0.6.1",
+  "total_package_size": "00000000001685328544"
 }
